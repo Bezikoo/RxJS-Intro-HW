@@ -1,0 +1,28 @@
+<section class="courses-page">
+  <h1>Courses</h1>
+
+  <label for="search" class="search-label">Search by title</label>
+  <input
+    id="search"
+    type="text"
+    class="search-input"
+    [formControl]="searchControl"
+    placeholder="Type course name..."
+  />
+
+  @if (courses$ | async; as courses) {
+    @if (courses.length > 0) {
+      <ul class="courses-list">
+        @for (course of courses; track course.id) {
+          <li class="course-card">
+            <h2>{{ course.title }}</h2>
+            <p><strong>Category:</strong> {{ course.category }}</p>
+            <p><strong>Duration:</strong> {{ course.duration }}</p>
+          </li>
+        }
+      </ul>
+    } @else {
+      <p class="empty-state">No courses found for your query.</p>
+    }
+  }
+</section>
